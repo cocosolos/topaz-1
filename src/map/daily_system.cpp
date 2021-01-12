@@ -156,27 +156,46 @@ namespace daily
     {
         uint16 dailyTallyLimit  = map_config.daily_tally_limit;
         uint16 dailyTallyAmount = map_config.daily_tally_amount;
+        bool update = false;
 
-        const char* fmtQuery = "UPDATE char_points \
-                SET char_points.daily_tally = LEAST(%u, char_points.daily_tally + %u) \
-                WHERE char_points.daily_tally > -1;";
+        int32 ret = Sql_Query(SqlHandle, "SELECT value FROM server_variables WHERE name = 'Daily_Tally';");
 
-        int32 ret = Sql_Query(SqlHandle, fmtQuery, dailyTallyLimit, dailyTallyAmount);
-
-        if (ret == SQL_ERROR)
+        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
         {
-            ShowError("Failed to update daily tally points\n");
+            if (Sql_GetUIntData(SqlHandle, 0) != CVanaTime::getInstance()->getJstYearDay())
+            {
+                update = true;
+            }
         }
         else
         {
-            ShowDebug("Distributed daily tally points\n");
+            update = true;
         }
-
-        fmtQuery = "DELETE FROM char_vars WHERE varname = 'gobbieBoxUsed';";
-
-        if (Sql_Query(SqlHandle, fmtQuery, dailyTallyAmount) == SQL_ERROR)
+        if (update)
         {
-            ShowError("Failed to delete daily tally char_vars entries");
+            Sql_Query(SqlHandle, "REPLACE INTO server_variables (name,value) VALUES('Daily_Tally', %u);", CVanaTime::getInstance()->getJstYearDay());
+
+            const char* fmtQuery = "UPDATE char_points \
+                    SET char_points.daily_tally = LEAST(%u, char_points.daily_tally + %u) \
+                    WHERE char_points.daily_tally > -1;";
+
+            ret = Sql_Query(SqlHandle, fmtQuery, dailyTallyLimit, dailyTallyAmount);
+
+            if (ret == SQL_ERROR)
+            {
+                ShowError("Failed to update daily tally points\n");
+            }
+            else
+            {
+                ShowDebug("Distributed daily tally points\n");
+            }
+
+            fmtQuery = "DELETE FROM char_vars WHERE varname = 'gobbieBoxUsed';";
+
+            if (Sql_Query(SqlHandle, fmtQuery, dailyTallyAmount) == SQL_ERROR)
+            {
+                ShowError("Failed to delete daily tally char_vars entries");
+            }
         }
     }
 } // namespace daily
