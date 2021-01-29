@@ -26,6 +26,8 @@ from migrations import eminence_blob
 from migrations import char_timestamp
 from migrations import currency_columns
 from migrations import add_instance_zone_column
+from migrations import convert_mission_status
+from migrations import convert_zilart_status
 # Append new migrations to this list and import above
 migrations = [
     unnamed_flags,
@@ -44,6 +46,8 @@ migrations = [
     char_timestamp,
     currency_columns,
     add_instance_zone_column,
+    convert_mission_status,
+    convert_zilart_status,
 ]
 # These are the default 'protected' files
 player_data = [
