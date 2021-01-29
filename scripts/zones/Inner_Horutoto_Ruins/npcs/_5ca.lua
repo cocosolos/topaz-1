@@ -16,7 +16,7 @@ end
 entity.onTrigger = function(player, npc)
     local MakingHeadlines = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
     local CurrentMission = player:getCurrentMission(WINDURST)
-    local MissionStatus = player:getCharVar("MissionStatus")
+    local MissionStatus = player:getMissionStatus(player:getNation())
 
     -- Check for Missions first (priority?)
     -- We should allow both missions and quests to activate
@@ -47,7 +47,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 46 then
-        player:setCharVar("MissionStatus", 5) -- Mark the progress
+        player:setMissionStatus(player:getNation(), 5) -- Mark the progress
     end
 end
 

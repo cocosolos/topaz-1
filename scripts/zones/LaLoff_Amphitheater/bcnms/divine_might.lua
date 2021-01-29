@@ -52,7 +52,7 @@ battlefield_object.onEventFinish = function(player, csid, option)
             if player:getCurrentMission(ZILART) == tpz.mission.id.zilart.ARK_ANGELS then
                 player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.ARK_ANGELS)
                 player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_SEALED_SHRINE)
-                player:setCharVar("ZilartStatus", 0)
+                player:setMissionStatus(tpz.mission.log_id.ZILART, 0)
             end
         elseif player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT_REPEAT) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.MOONLIGHT_ORE) then
             player:setCharVar("DivineMight", 2)

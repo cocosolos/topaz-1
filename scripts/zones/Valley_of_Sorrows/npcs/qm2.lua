@@ -15,10 +15,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.BREAKING_BARRIERS and player:getCharVar("MissionStatus") == 1) then
+    if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.BREAKING_BARRIERS and player:getMissionStatus(player:getNation()) == 1) then
         player:addKeyItem(tpz.ki.FIGURE_OF_TITAN)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.FIGURE_OF_TITAN)
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end

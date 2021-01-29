@@ -17,7 +17,7 @@ entity.onTrigger = function(player, npc)
 
     if pNation == tpz.nation.SANDORIA then
         local currentMission = player:getCurrentMission(pNation)
-        local MissionStatus = player:getCharVar("MissionStatus")
+        local MissionStatus = player:getMissionStatus(player:getNation())
 
         if currentMission == tpz.mission.id.sandoria.APPOINTMENT_TO_JEUNO and MissionStatus == 6 then
             player:startEvent(39)
@@ -49,7 +49,7 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 39 then
         finishMissionTimeline(player, 3, csid, option)
     elseif csid == 130 and option == 1 then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
         if not player:hasKeyItem(tpz.ki.ARCHDUCAL_AUDIENCE_PERMIT) then
             player:addKeyItem(tpz.ki.ARCHDUCAL_AUDIENCE_PERMIT)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ARCHDUCAL_AUDIENCE_PERMIT)

@@ -17,7 +17,7 @@ end
 entity.onTrigger = function(player, npc)
     local ZilartMission = player:getCurrentMission(ZILART)
     local currentMission = player:getCurrentMission(BASTOK)
-    local ZilartStatus = player:getCharVar("ZilartStatus")
+    local ZilartStatus = player:getMissionStatus(tpz.mission.log_id.ZILART)
     local PromathiaMission = player:getCurrentMission(COP)
     local RhapsodiesMission = player:getCurrentMission(ROV)
 
@@ -57,11 +57,11 @@ entity.onTrigger = function(player, npc)
         player:startEvent(284, metTenzen, metPrishe)
     elseif (ZilartMission == tpz.mission.id.zilart.WELCOME_TNORG) then
         player:startEvent(2) -- Zilart Missions 2
-    elseif (ZilartMission == tpz.mission.id.zilart.ROMAEVE and player:getCharVar("ZilartStatus") <= 1) then
+    elseif (ZilartMission == tpz.mission.id.zilart.ROMAEVE and player:getMissionStatus(tpz.mission.log_id.ZILART) <= 1) then
         player:startEvent(3) -- Zilart Missions 9
     elseif (ZilartMission == tpz.mission.id.zilart.THE_HALL_OF_THE_GODS) then
         player:startEvent(169) -- Zilart Missions 11
-    elseif (currentMission == tpz.mission.id.bastok.THE_PIRATE_S_COVE and player:getCharVar("MissionStatus") == 1) then
+    elseif (currentMission == tpz.mission.id.bastok.THE_PIRATE_S_COVE and player:getMissionStatus(player:getNation()) == 1) then
         player:startEvent(98) -- Bastok Mission 6-2
     elseif (ZilartMission == tpz.mission.id.zilart.THE_SEALED_SHRINE and ZilartStatus == 0 and DMEarrings <=
         NUMBER_OF_DM_EARRINGS) then
@@ -88,16 +88,16 @@ entity.onEventFinish = function(player, csid, option)
         player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.WELCOME_TNORG)
         player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.KAZAMS_CHIEFTAINESS)
     elseif (csid == 3 and option == 0) then
-        player:setCharVar("ZilartStatus", 0)
+        player:setMissionStatus(tpz.mission.log_id.ZILART, 0)
         player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.ROMAEVE)
         player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_TEMPLE_OF_DESOLATION)
     elseif (csid == 169 and option == 0) then
         player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_HALL_OF_THE_GODS)
         player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL)
     elseif (csid == 98) then
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
     elseif (csid == 172 and bit.band(option, 0x40000000) == 0) then
-        player:setCharVar("ZilartStatus", 1);
+        player:setMissionStatus(tpz.mission.log_id.ZILART, 1);
     elseif csid == 276 then
         -- Clear 1-3 flag
         player:setCharVar("RhapsodiesStatus", 0)

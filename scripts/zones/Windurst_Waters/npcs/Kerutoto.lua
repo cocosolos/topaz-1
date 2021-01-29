@@ -53,11 +53,11 @@ entity.onTrigger = function(player, npc)
     local waking_dreams = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WAKING_DREAMS)
 
     -- Awakening of the Gods
-    if (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 0) then
+    if (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 0) then
         player:startEvent(737)
-    elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 1) then
+    elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 1) then
         player:startEvent(736)
-    elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 2) then
+    elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 2) then
         player:startEvent(738)
 
     -- Three Paths
@@ -218,7 +218,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
         end
     elseif (csid == 736) then
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
 
     end
 

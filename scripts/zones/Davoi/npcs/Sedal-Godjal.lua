@@ -17,7 +17,7 @@ entity.onTrade = function(player, npc, trade)
     if
         npcUtil.tradeHas(trade, 17437) and -- Curse Wand
         player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and
-        player:getCharVar("MissionStatus") == 3 and
+        player:getMissionStatus(player:getNation()) == 3 and
         player:hasKeyItem(tpz.ki.MAGIC_DRAINED_STAR_SEEKER)
     then
         player:startEvent(120)
@@ -26,12 +26,12 @@ end
 
 entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(WINDURST)
-    local missionStatus = player:getCharVar("MissionStatus")
+    local missionStatus = player:getMissionStatus(player:getNation())
 
     -- The Jester Who'd Be King (Windurst 8-2)
     if
         currentMission == tpz.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
-        player:getCharVar("MissionStatus") == 1 and not
+        player:getMissionStatus(player:getNation()) == 1 and not
         player:hasKeyItem(tpz.ki.AURASTERY_RING)
     then
         player:startEvent(122, 0, tpz.ki.AURASTERY_RING)
@@ -74,17 +74,17 @@ entity.onEventFinish = function(player, csid, option)
     -- The Jester Who'd Be King (Windurst 8-2)
     if csid == 122 and npcUtil.giveKeyItem(player, tpz.ki.AURASTERY_RING) then
         if player:hasKeyItem(tpz.ki.RHINOSTERY_RING) and player:hasKeyItem(tpz.ki.OPTISTERY_RING) then
-            player:setCharVar("MissionStatus", 2)
+            player:setMissionStatus(player:getNation(), 2)
         end
 
     -- Vain (Windurst 8-1)
     elseif csid == 118 then
         player:delKeyItem(tpz.ki.STAR_SEEKER)
         npcUtil.giveKeyItem(player, tpz.ki.MAGIC_DRAINED_STAR_SEEKER)
-        player:setCharVar("MissionStatus", 3)
+        player:setMissionStatus(player:getNation(), 3)
     elseif csid == 120 then
         player:tradeComplete()
-        player:setCharVar("MissionStatus", 4)
+        player:setMissionStatus(player:getNation(), 4)
 
     -- Whence Blows the Wind
     elseif csid == 22 and option == 1 then

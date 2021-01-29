@@ -18,7 +18,7 @@ end
 entity.onTrigger = function(player, npc)
     local StampHunt = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.STAMP_HUNT)
 
-    if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.RETURN_OF_THE_TALEKEEPER and player:getCharVar("MissionStatus") == 3) then
+    if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.RETURN_OF_THE_TALEKEEPER and player:getMissionStatus(player:getNation()) == 3) then
         player:startEvent(182)
     elseif (StampHunt == QUEST_ACCEPTED and not utils.mask.getBit(player:getCharVar("StampHunt_Mask"), 1)) then
         player:startEvent(85)

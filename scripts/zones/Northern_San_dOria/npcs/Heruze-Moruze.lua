@@ -17,7 +17,7 @@ entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(pNation)
 
     if (pNation == tpz.nation.WINDURST) then
-        if (currentMission == tpz.mission.id.windurst.THE_THREE_KINGDOMS and player:getCharVar("MissionStatus") == 1) then
+        if (currentMission == tpz.mission.id.windurst.THE_THREE_KINGDOMS and player:getMissionStatus(player:getNation()) == 1) then
             player:startEvent(582)
         else
             player:startEvent(554)
@@ -36,7 +36,7 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 582) then
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
     end
 
 end

@@ -41,7 +41,7 @@ battlefield_object.onEventFinish = function(player, csid, option)
             player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_CELESTIAL_NEXUS)
             player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.AWAKENING)
             player:addTitle(tpz.title.BURIER_OF_THE_ILLUSION)
-            player:setCharVar("ZilartStatus", 0)
+            player:setMissionStatus(tpz.mission.log_id.ZILART, 0)
         end
         player:setPos(0, -18, 137, 64, 251) -- Hall of the Gods
     end

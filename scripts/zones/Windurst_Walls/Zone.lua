@@ -29,7 +29,7 @@ zone_object.onZoneIn = function(player, prevZone)
         and (prevZone == tpz.zone.WINDURST_WATERS or prevZone == tpz.zone.WINDURST_WOODS) and player:getMainLvl()>=10
     then
         cs = 510
-    elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.MOON_READING and player:getCharVar("MissionStatus") == 4 then
+    elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.MOON_READING and player:getMissionStatus(player:getNation()) == 4 then
         cs = 443
     end
 
@@ -72,7 +72,7 @@ zone_object.onEventFinish = function(player, csid, option)
         player:setCharVar("ASA_Status", 0)
     elseif csid == 443 then
         player:completeMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.MOON_READING)
-        player:setCharVar("MissionStatus", 0)
+        player:setMissionStatus(player:getNation(), 0)
         player:setRank(10)
         player:addGil(GIL_RATE*100000)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*100000)

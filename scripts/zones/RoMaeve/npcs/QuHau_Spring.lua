@@ -27,7 +27,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local CurrentMission = player:getCurrentMission(WINDURST)
-    local MissionStatus = player:getCharVar("MissionStatus")
+    local MissionStatus = player:getMissionStatus(player:getNation())
 
     if (CurrentMission == tpz.mission.id.windurst.VAIN and MissionStatus >= 1) then
         player:startEvent(2)
@@ -55,7 +55,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addKeyItem(tpz.ki.MOONLIGHT_ORE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MOONLIGHT_ORE)
     elseif (csid == 2 and player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN) then
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
     elseif (csid == 4 and player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.MOON_READING) then
         player:addKeyItem(tpz.ki.ANCIENT_VERSE_OF_ROMAEVE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ANCIENT_VERSE_OF_ROMAEVE)

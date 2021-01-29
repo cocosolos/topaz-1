@@ -16,7 +16,7 @@ end
 entity.onTrigger = function(player, npc)
 
     if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.THE_RESCUE_DRILL) then
-        local MissionStatus = player:getCharVar("MissionStatus")
+        local MissionStatus = player:getMissionStatus(player:getNation())
 
         if (MissionStatus == 4) then
             player:startEvent(108)
@@ -45,12 +45,12 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 108) then
-        player:setCharVar("MissionStatus", 5)
+        player:setMissionStatus(player:getNation(), 5)
     elseif (csid == 115) then
         player:addKeyItem(tpz.ki.RESCUE_TRAINING_CERTIFICATE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.RESCUE_TRAINING_CERTIFICATE)
         player:setCharVar("theRescueDrillRandomNPC", 0)
-        player:setCharVar("MissionStatus", 11)
+        player:setMissionStatus(player:getNation(), 11)
     end
 
 end

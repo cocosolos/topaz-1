@@ -17,12 +17,12 @@ end
 entity.onTrigger = function(player, npc)
 
     local ZilartMission = player:getCurrentMission(ZILART)
-    local ZilartStatus = player:getCharVar("ZilartStatus")
+    local ZilartStatus = player:getMissionStatus(tpz.mission.log_id.ZILART)
 
     if (player:hasKeyItem(tpz.ki.LETTERS_TO_ALDO)) then
         player:startEvent(152)
     elseif (player:getCurrentMission(player:getNation()) == tpz.mission.id.nation.MAGICITE and
-        player:getCharVar("MissionStatus") == 3) then
+        player:getMissionStatus(player:getNation()) == 3) then
         player:startEvent(183)
     elseif (ZilartMission == tpz.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER and ZilartStatus == 0) then
         player:startEvent(104)
@@ -45,9 +45,9 @@ entity.onEventFinish = function(player, csid, option)
         player:delKeyItem(tpz.ki.LETTERS_TO_ALDO)
         player:addKeyItem(tpz.ki.SILVER_BELL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SILVER_BELL)
-        player:setCharVar("MissionStatus", 3)
+        player:setMissionStatus(player:getNation(), 3)
     elseif (csid == 104) then
-        player:setCharVar("ZilartStatus", 1);
+        player:setMissionStatus(tpz.mission.log_id.ZILART, 1);
     elseif csid == 10057 then
         player:setCharVar("ApocalypseNigh", 6)
     end

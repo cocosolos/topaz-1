@@ -37,7 +37,7 @@ zone_object.onZoneIn = function(player, prevZone)
     if prevZone == tpz.zone.PASHHOW_MARSHLANDS then
         if player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BLADE_OF_DARKNESS) == QUEST_ACCEPTED and player:getCharVar("ChaosbringerKills") >= 100 then
             cs = 121
-        elseif player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_FOUR_MUSKETEERS and player:getCharVar("MissionStatus") == 1 then
+        elseif player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_FOUR_MUSKETEERS and player:getMissionStatus(player:getNation()) == 1 then
             cs = 120
         elseif player:getMainJob() == tpz.job.DRK and player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DARK_PUPPET) == QUEST_COMPLETED and player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BLADE_OF_EVIL) == QUEST_AVAILABLE then
             cs = 122
@@ -73,7 +73,7 @@ zone_object.onEventFinish = function(player, csid, option)
         player:unlockJob(tpz.job.DRK)
         player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME_A_DARK_KNIGHT)
     elseif csid == 120 then
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
         player:setPos(-297, 1, 96, 1)
     elseif csid == 122 then
         player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BLADE_OF_EVIL)

@@ -38,9 +38,9 @@ battlefield_object.onEventFinish = function(player, csid, option)
     if
         csid == 32001 and
         player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and
-        player:getCharVar("MissionStatus") == 3
+        player:getMissionStatus(player:getNation()) == 3
     then
-        player:setCharVar("MissionStatus", 4)
+        player:setMissionStatus(player:getNation(), 4)
     end
 end
 

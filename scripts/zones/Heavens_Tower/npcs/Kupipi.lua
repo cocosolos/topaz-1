@@ -57,7 +57,7 @@ end
 entity.onTrigger = function(player, npc)
     local pNation = player:getNation()
     local currentMission = player:getCurrentMission(pNation)
-    local missionStatus = player:getCharVar("MissionStatus")
+    local missionStatus = player:getMissionStatus(player:getNation())
 
     local TrustSandoria = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA)
     local TrustBastok   = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
@@ -159,26 +159,26 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 238 then
         if player:getNation() == tpz.nation.BASTOK then
-            player:setCharVar("MissionStatus", 4)
+            player:setMissionStatus(player:getNation(), 4)
             player:addKeyItem(tpz.ki.SWORD_OFFERING)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SWORD_OFFERING)
         else
-            player:setCharVar("MissionStatus", 5)
+            player:setMissionStatus(player:getNation(), 5)
             player:addKeyItem(tpz.ki.SHIELD_OFFERING)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SHIELD_OFFERING)
         end
     elseif csid == 244 or csid == 246 then
-        player:setCharVar("MissionStatus", 10)
+        player:setMissionStatus(player:getNation(), 10)
     elseif csid == 242 then
         player:addKeyItem(tpz.ki.DARK_KEY)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.DARK_KEY)
-        player:setCharVar("MissionStatus", 8)
+        player:setMissionStatus(player:getNation(), 8)
     elseif csid == 95 then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
         player:addKeyItem(tpz.ki.LETTER_TO_THE_CONSULS_WINDURST)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LETTER_TO_THE_CONSULS_WINDURST)
     elseif csid == 103 then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
         player:addKeyItem(tpz.ki.STARWAY_STAIRWAY_BAUBLE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.STARWAY_STAIRWAY_BAUBLE)
     elseif csid == 101 then
@@ -195,7 +195,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addKeyItem(tpz.ki.PORTAL_CHARM)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.PORTAL_CHARM)
     elseif csid == 326 then
-        player:setCharVar("MissionStatus", 4)
+        player:setMissionStatus(player:getNation(), 4)
     elseif csid == 400 then
         player:setCharVar("KupipiDisbelief", 0)
     elseif csid == 408 then

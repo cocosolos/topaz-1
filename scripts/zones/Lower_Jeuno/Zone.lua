@@ -53,7 +53,7 @@ end
 
 zone_object.onRegionEnter = function(player, region)
     if region:GetRegionID() == 1 then
-        if player:getCurrentMission(ZILART) == tpz.mission.id.zilart.AWAKENING and player:getCharVar("ZilartStatus") < 2 then
+        if player:getCurrentMission(ZILART) == tpz.mission.id.zilart.AWAKENING and player:getMissionStatus(tpz.mission.log_id.ZILART) < 2 then
             player:startEvent(20)
         end
     end

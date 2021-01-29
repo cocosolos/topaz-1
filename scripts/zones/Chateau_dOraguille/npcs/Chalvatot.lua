@@ -27,7 +27,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(SANDORIA)
-    local MissionStatus = player:getCharVar("MissionStatus")
+    local MissionStatus = player:getMissionStatus(player:getNation())
     local circleOfTime = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME)
     local circleProgress = player:getCharVar("circleTime")
     local lureOfTheWildcat = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT)

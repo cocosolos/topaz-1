@@ -15,7 +15,7 @@ end
 entity.onTrigger = function(player, npc)
 
     if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.THE_RESCUE_DRILL) then
-        local MissionStatus = player:getCharVar("MissionStatus")
+        local MissionStatus = player:getMissionStatus(player:getNation())
 
         if (MissionStatus == 2) then
             player:startEvent(101)
@@ -50,14 +50,14 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 101) then
-        player:setCharVar("MissionStatus", 3)
+        player:setMissionStatus(player:getNation(), 3)
     elseif (csid == 112) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16535) -- Bronze Sword
         else
             player:addItem(16535)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16535) -- Bronze Sword
-            player:setCharVar("MissionStatus", 9)
+            player:setMissionStatus(player:getNation(), 9)
         end
     end
 

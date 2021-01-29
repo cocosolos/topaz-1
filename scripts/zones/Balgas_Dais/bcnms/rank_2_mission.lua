@@ -42,7 +42,7 @@ battlefield_object.onEventFinish = function(player, csid, option)
         if player:hasKeyItem(tpz.ki.DARK_KEY) then
             player:delKeyItem(tpz.ki.DARK_KEY)
             npcUtil.giveKeyItem(player, tpz.ki.KINDRED_CREST)
-            player:setCharVar("MissionStatus", 9)
+            player:setMissionStatus(player:getNation(), 9)
         end
     end
 end

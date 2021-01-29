@@ -39,7 +39,7 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(-45, -0, 26, 213)
         player:setHomePoint()
     -- ENTER THE TALEKEEPER
-    elseif prevZone == tpz.zone.ZERUHN_MINES and player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.ENTER_THE_TALEKEEPER and player:getCharVar("MissionStatus") == 5 then
+    elseif prevZone == tpz.zone.ZERUHN_MINES and player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.ENTER_THE_TALEKEEPER and player:getMissionStatus(player:getNation()) == 5 then
         cs = 176
     end
 

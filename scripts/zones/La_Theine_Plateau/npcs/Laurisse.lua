@@ -15,7 +15,7 @@ end
 entity.onTrigger = function(player, npc)
 
     if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.THE_RESCUE_DRILL) then
-        local MissionStatus = player:getCharVar("MissionStatus")
+        local MissionStatus = player:getMissionStatus(player:getNation())
 
         if (MissionStatus == 5) then
             player:startEvent(106)
@@ -40,7 +40,7 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 106) then
-        player:setCharVar("MissionStatus", 6)
+        player:setMissionStatus(player:getNation(), 6)
     end
 
 end

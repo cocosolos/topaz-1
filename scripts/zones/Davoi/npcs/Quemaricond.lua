@@ -37,7 +37,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.INFILTRATE_DAVOI and player:getCharVar("MissionStatus") == 3) then
+    if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.INFILTRATE_DAVOI and player:getMissionStatus(player:getNation()) == 3) then
         player:startEvent(117)
         npc:wait()
     else
@@ -53,7 +53,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
 
     if (csid == 117) then
-        player:setCharVar("MissionStatus", 4)
+        player:setMissionStatus(player:getNation(), 4)
         player:addKeyItem(tpz.ki.ROYAL_KNIGHTS_DAVOI_REPORT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ROYAL_KNIGHTS_DAVOI_REPORT)
     end

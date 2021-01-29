@@ -39,10 +39,10 @@ battlefield_object.onEventFinish = function(player, csid, option)
                 player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2 or
                 player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_EMISSARY_SANDORIA2
             ) and
-            player:getCharVar("MissionStatus") == 9
+            player:getMissionStatus(player:getNation()) == 9
         then
             npcUtil.giveKeyItem(player, tpz.ki.KINDRED_CREST)
-            player:setCharVar("MissionStatus", 10)
+            player:setMissionStatus(player:getNation(), 10)
         end
     end
 end

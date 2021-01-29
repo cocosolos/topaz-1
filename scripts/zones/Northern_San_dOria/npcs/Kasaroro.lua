@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
     local pNation = player:getNation()
     if (pNation == tpz.nation.WINDURST) then
         local currentMission = player:getCurrentMission(pNation)
-        local MissionStatus = player:getCharVar("MissionStatus")
+        local MissionStatus = player:getMissionStatus(player:getNation())
 
         if (currentMission == tpz.mission.id.windurst.THE_THREE_KINGDOMS) then
             if (MissionStatus == 2) then
@@ -64,19 +64,19 @@ entity.onEventFinish = function(player, csid, option)
     if (csid == 546) then
         player:addMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA)
         player:delKeyItem(tpz.ki.LETTER_TO_THE_CONSULS_WINDURST)
-        player:setCharVar("MissionStatus", 3)
+        player:setMissionStatus(player:getNation(), 3)
     elseif (csid == 550) then
         player:addMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS)
-        player:setCharVar("MissionStatus", 6)
+        player:setMissionStatus(player:getNation(), 6)
     elseif (csid == 547) then
         player:addMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2)
-        player:setCharVar("MissionStatus", 8)
+        player:setMissionStatus(player:getNation(), 8)
     elseif (csid == 551) then
         player:addMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS)
         player:delKeyItem(tpz.ki.KINDRED_CREST)
         player:addKeyItem(tpz.ki.KINDRED_REPORT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.KINDRED_REPORT)
-        player:setCharVar("MissionStatus", 11)
+        player:setMissionStatus(player:getNation(), 11)
     end
 
 end

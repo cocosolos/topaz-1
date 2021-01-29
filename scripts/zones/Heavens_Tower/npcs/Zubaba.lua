@@ -15,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
     local currentMission = player:getCurrentMission(WINDURST)
     local nextMissionFinished = player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.A_NEW_JOURNEY)
 
-    if currentMission == tpz.mission.id.windurst.WRITTEN_IN_THE_STARS and player:getCharVar("MissionStatus") == 3 then
+    if currentMission == tpz.mission.id.windurst.WRITTEN_IN_THE_STARS and player:getMissionStatus(player:getNation()) == 3 then
         if trade:hasItemQty(16447, 3) and trade:getItemCount() == 3 then -- Trade Rusty Dagger
             player:tradeComplete()
             player:startEvent(151)
@@ -25,7 +25,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(WINDURST)
-    local missionStatus = player:getCharVar("MissionStatus")
+    local missionStatus = player:getMissionStatus(player:getNation())
     local nextMissionFinished = player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.A_NEW_JOURNEY)
     local starsMissionFinished = player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS)
 
@@ -71,9 +71,9 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 121 then
         player:addKeyItem(tpz.ki.CHARM_OF_LIGHT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CHARM_OF_LIGHT)
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
     elseif csid == 149 or csid == 257 then
-        player:setCharVar("MissionStatus", 3)
+        player:setMissionStatus(player:getNation(), 3)
     elseif csid == 135 or csid == 151 then
         finishMissionTimeline(player, 1, csid, option)
     elseif csid == 387 then

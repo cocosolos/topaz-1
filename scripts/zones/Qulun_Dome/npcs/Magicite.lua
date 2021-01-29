@@ -34,7 +34,7 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:setCharVar("Magicite", player:getCharVar("Magicite")+1)
         end
-        player:setCharVar("MissionStatus", 4)
+        player:setMissionStatus(player:getNation(), 4)
         player:addKeyItem(tpz.ki.MAGICITE_AURASTONE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAGICITE_AURASTONE)
     end

@@ -16,7 +16,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local CurrentZM = player:getCurrentMission(ZILART)
-    local ZMProgress = player:getCharVar("ZilartStatus")
+    local ZMProgress = player:getMissionStatus(tpz.mission.log_id.ZILART)
     local DMStatus = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT)
     local DMRepeat = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT_REPEAT)
     local AAKeyitems = 0
@@ -71,7 +71,7 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 53) then -- Got the required cutscene for AA
-        player:setCharVar("ZilartStatus", 1)
+        player:setMissionStatus(tpz.mission.log_id.ZILART, 1)
 
     elseif ((csid == 54 or csid == 56) and player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT) == QUEST_AVAILABLE) then -- Flag Divine Might
         player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT)

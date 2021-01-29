@@ -31,7 +31,7 @@ entity.onTrade = function(player, npc, trade)
 
     if wsQuestEvent ~= nil then
         player:startEvent(wsQuestEvent)
-    elseif (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_CRYSTAL_LINE and player:getCharVar("MissionStatus") == 1) then
+    elseif (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_CRYSTAL_LINE and player:getMissionStatus(player:getNation()) == 1) then
         if (trade:getItemQty(613, 1) and trade:getItemCount() == 1) then
             player:startEvent(506)
         end
@@ -120,9 +120,9 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(505)
         end
-    elseif (currentMission == tpz.mission.id.bastok.THE_FINAL_IMAGE and player:getCharVar("MissionStatus") == 0) then
+    elseif (currentMission == tpz.mission.id.bastok.THE_FINAL_IMAGE and player:getMissionStatus(player:getNation()) == 0) then
         player:startEvent(763) -- Bastok Mission 7-1
-    elseif (currentMission == tpz.mission.id.bastok.THE_FINAL_IMAGE and player:getCharVar("MissionStatus") == 2) then
+    elseif (currentMission == tpz.mission.id.bastok.THE_FINAL_IMAGE and player:getMissionStatus(player:getNation()) == 2) then
         player:startEvent(764) -- Bastok Mission 7-1 (with Ki)
     --Begin Cid's Secret
     elseif (player:getFameLevel(BASTOK) >= 4 and CidsSecret == QUEST_AVAILABLE) then
@@ -206,12 +206,12 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 504 or csid == 764) then
         finishMissionTimeline(player, 1, csid, option)
     elseif (csid == 505 and option == 0) then
-        if (player:getCharVar("MissionStatus") == 0) then
+        if (player:getMissionStatus(player:getNation()) == 0) then
             if (player:getFreeSlotsCount(0) >= 1) then
                 crystal = math.random(4096, 4103)
                 player:addItem(crystal)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, crystal)
-                player:setCharVar("MissionStatus", 1)
+                player:setMissionStatus(player:getNation(), 1)
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, crystal)
             end
@@ -221,7 +221,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addKeyItem(tpz.ki.C_L_REPORTS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.C_L_REPORTS)
     elseif (csid == 763) then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
     elseif (csid == 507) then
         player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.CID_S_SECRET)
     elseif (csid == 509) then

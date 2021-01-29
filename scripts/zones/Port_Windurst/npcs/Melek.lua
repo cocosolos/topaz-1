@@ -21,7 +21,7 @@ entity.onTrigger = function(player, npc)
         currentMission = player:getCurrentMission(pNation)
 
         if (pNation == tpz.nation.BASTOK) then
-            missionStatus = player:getCharVar("MissionStatus")
+            missionStatus = player:getMissionStatus(player:getNation())
             if (currentMission == tpz.mission.id.bastok.THE_EMISSARY) then
                 -- Bastok Mission 2-3 Part I - Windurst > San d'Oria
                 if (missionStatus == 1) then
@@ -71,24 +71,24 @@ entity.onEventFinish = function(player, csid, option)
 
     if (csid == 48) then
         player:addMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_EMISSARY_WINDURST)
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
         player:delKeyItem(tpz.ki.LETTER_TO_THE_CONSULS_BASTOK)
     elseif (csid == 53) then
         player:addKeyItem(tpz.ki.DULL_SWORD)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.DULL_SWORD)
-        player:setCharVar("MissionStatus", 4)  --> Gideus next
+        player:setMissionStatus(player:getNation(), 4)  --> Gideus next
         player:delKeyItem(tpz.ki.SWORD_OFFERING) -- remove sword offering
     elseif (csid == 55) then
         player:addMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_EMISSARY)
-        player:setCharVar("MissionStatus", 7) -- to Sandy now
+        player:setMissionStatus(player:getNation(), 7) -- to Sandy now
     elseif (csid == 61) then
         player:addMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_EMISSARY_WINDURST2)
-        player:setCharVar("MissionStatus", 7)
+        player:setMissionStatus(player:getNation(), 7)
     elseif (csid == 66) then
         player:addMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_EMISSARY)
         player:addKeyItem(tpz.ki.KINDRED_REPORT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.KINDRED_REPORT)
-        player:setCharVar("MissionStatus", 10)  -- return to Bastok
+        player:setMissionStatus(player:getNation(), 10)  -- return to Bastok
         player:delKeyItem(tpz.ki.KINDRED_CREST)
     end
 
