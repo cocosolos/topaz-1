@@ -41,15 +41,22 @@ tpz.mission.area =
     [tpz.mission.log_id.ROV]         = 'rov',
 }
 
-tpz.mission.logEx =
+--[[
+tpz.mission.status =
 {
-    -- Chains of Promathia
-    SANDORIA   = 0,
-    WINDURST   = 1,
-    LOUVERANCE = 2,
-    TENZEN     = 3,
-    ULMIA      = 4,
+    COP =
+    {
+        SANDORIA   = 0,
+        WINDURST   = 1,
+        LOUVERANCE = 2,
+        TENZEN     = 3,
+        ULMIA      = 4,
+        PROMY      = 5,
+        CID        = 6,
+        RUBIOUS    = 7,
+    },
 }
+]]--
 
 tpz.mission.id =
 {
